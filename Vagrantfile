@@ -35,7 +35,6 @@ Vagrant.configure("2") do |config|
 			systemctl enable tomcat 
 			systemctl start tomcat 
 		SHELL
-
 	end
 
 	config.vm.define "tomcat2" do |tomcat2|		
