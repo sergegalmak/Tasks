@@ -13,7 +13,6 @@ Vagrant.configure("2") do |config|
 
 	config.vm.provider "virtualbox" do |vb|
 		vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
-	
 	end
 
 	config.vm.define "tomcat1" do |tomcat1|
@@ -35,7 +34,6 @@ Vagrant.configure("2") do |config|
 			echo "tomcat1 172.28.128.22" > /usr/share/tomcat/webapps/test/index.html 
 			systemctl enable tomcat 
 			systemctl start tomcat 
-			
 		SHELL
 
 	end
@@ -66,7 +64,6 @@ Vagrant.configure("2") do |config|
 		config.vm.provider :virtualbox do |vb|
 			vb.name = "apache"
 			vb.memory = "512"
-		
 		end
 	
 		apache.vm.hostname = "apache"
@@ -83,29 +80,25 @@ Vagrant.configure("2") do |config|
 			cp /vagrant/mod_jk.so /etc/httpd/modules/
 	
 			echo	"worker.list=lb
-					worker.lb.type=lb
-					worker.lb.balance_workers=tomcat1, tomcat2
-					worker.tomcat1.host=172.28.128.22
-					worker.tomcat1.port=8009
-					worker.tomcat1.type=ajp13
-					worker.tomcat2.host=172.28.128.23
-					worker.tomcat2.port=8009
-					worker.tomcat2.type=ajp13
-					" > /etc/httpd/conf/workers.properties
+				worker.lb.type=lb
+				worker.lb.balance_workers=tomcat1, tomcat2
+				worker.tomcat1.host=172.28.128.22
+				worker.tomcat1.port=8009
+				worker.tomcat1.type=ajp13
+				worker.tomcat2.host=172.28.128.23
+				worker.tomcat2.port=8009
+				worker.tomcat2.type=ajp13
+				" > /etc/httpd/conf/workers.properties
 			
 			echo 	"LoadModule jk_module modules/mod_jk.so
-					JkWorkersFile conf/workers.properties
-					JkShmFile /tmp/shm
-					JkLogFile logs/mod_jk.log
-					JkLogLevel info
-					JkMount /test* lb
-					" >> /etc/httpd/conf/httpd.conf
+				JkWorkersFile conf/workers.properties
+				JkShmFile /tmp/shm
+				JkLogFile logs/mod_jk.log
+				JkLogLevel info
+				JkMount /test* lb
+				" >> /etc/httpd/conf/httpd.conf
 					
 			systemctl start httpd 
-			
-			
-		
-	
 		SHELL
 	end
 	end
