@@ -37,6 +37,7 @@ Vagrant.configure("2") do |config|
 		SHELL
 
 	end
+
 	config.vm.define "tomcat2" do |tomcat2|		
 		config.vm.provider :virtualbox do |vb|
 			vb.name = "tomcat2"
@@ -56,7 +57,6 @@ Vagrant.configure("2") do |config|
 			echo "tomcat2 172.28.128.23" > /usr/share/tomcat/webapps/test/index.html 
 			systemctl enable tomcat 
 			systemctl start tomcat 
-			
 		SHELL
 	end
 	
