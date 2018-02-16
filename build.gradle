@@ -1,0 +1,28 @@
+apply plugin: 'war'
+
+repositories {
+	mavenCentral ()
+}
+
+dependencies {
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+war {
+	archiveName 'task4.war'
+}
+
+task a << {
+	def (a, b, c) = version.split('\\.')
+	c = ++c
+	def version_new = (a+"."+b+"."+c)
+	println (version_new)
+	ant.replace(file: "gradle.properties", token: version, value: version_new)
+}
+
+task b << {
+	def fileName = "greetings.txt"
+	def inputFile = new File("build/"+fileName)
+	inputFile.write(version)
+}
