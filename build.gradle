@@ -9,6 +9,8 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
+tasks.war.dependsOn("b")
+
 war  {
 	archiveName 'task4.war'
 }
@@ -27,4 +29,4 @@ task b << {
 	inputFile.write(version)
 }
 
-build.dependsOn b
+
