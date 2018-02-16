@@ -9,7 +9,7 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
-war {
+war  {
 	archiveName 'task4.war'
 }
 
@@ -22,7 +22,9 @@ task a << {
 }
 
 task b << {
-	def fileName = "greetings.txt"
-	def inputFile = new File("build/"+fileName)
+	def fileName = "greeting.txt"
+	def inputFile = new File("src/main/resources/"+fileName)
 	inputFile.write(version)
 }
+
+build.dependsOn b
