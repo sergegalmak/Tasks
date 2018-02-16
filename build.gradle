@@ -23,7 +23,7 @@ task a << {
 
 task b << {
 	def fileName = "greeting.txt"
-	def inputFile = new File("src/main/resources/"+fileName)
+	def inputFile = new File("build/resources/main/"+fileName)
 	inputFile.write(version)
 }
 
