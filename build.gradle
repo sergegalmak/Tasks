@@ -12,7 +12,7 @@ dependencies {
 tasks.war.dependsOn("b")
 
 war  {
-	archiveName 'task4.war'
+	new File("gradle.properties").write "version = $version"
 }
 
 task a << {
